@@ -1,12 +1,52 @@
-<h2>Paises</h2>
-<hr>
+<div class="titles">
+	<h2>Paises</h2>
+	<hr>
+</div>
 
+<div class="routerLinks"> 
   <ul class="list-group">
-    <li routerLink="home" class="list-group-item">
+    <!-- <li routerLink="home" 
+		class="list-group-item" 
+		routerLinkActive="active" 
+		[routerLinkActiveOptions]="{exact: true}">
 		Home Page
 	</li>
-	<li routerLink="about" class="list-group-item">
+	<li routerLink="about" 
+		class="list-group-item" 
+		routerLinkActive="active" 
+		[routerLinkActiveOptions]="{exact: true}">
 		About Page
 	</li>
+		<li routerLink="contact" 
+		class="list-group-item" 
+		routerLinkActive="active" 
+		[routerLinkActiveOptions]="{exact: true}">
+		Contact Page
+	</li> -->
+	<li routerLink="countries/by-country" 
+		class="list-group-item" 
+		routerLinkActive="active" 
+		[routerLinkActiveOptions]="{exact: true}">
+		Por Pais
+	</li>
+		<li routerLink="countries/by-capital" 
+		class="list-group-item" 
+		routerLinkActive="active" 
+		[routerLinkActiveOptions]="{exact: true}">
+		Por Capital
+	</li>
+		<li routerLink="countries/by-region" 
+		class="list-group-item" 
+		routerLinkActive="active" 
+		[routerLinkActiveOptions]="{exact: true}">
+		Por Region
+	<!-- </li>
+		<li routerLink="by/:id" 
+		class="list-group-item" 
+		routerLinkActive="active" 
+		[routerLinkActiveOptions]="{exact: true}">
+		Pais
+	</li> -->
   </ul>
 
+</div>
