@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, catchError, of } from 'rxjs';
 import { Country } from '../interfaces/country';
 
 @Injectable({providedIn: 'root'})
@@ -12,9 +12,36 @@ export class CountriesService {
 	constructor(private http: HttpClient) { }
 
 
-	searchCapital(term : string): Observable<Country[]> {
-		return this.http.get<Country[]>(`${this.apiUrl}/capital/${term}`)
+	searchCountryByAlphaCode( code: string): Observable<Country[]>{
+		return this.http.get<Country[]>(`${this.apiUrl}/alpha/${code}`)
+		.pipe(
+			catchError( () => of ([])) 
+		)
 
 	}
-	
+
+
+	searchCapital(term : string): Observable<Country[]> {
+		return this.http.get<Country[]>(`${this.apiUrl}/capital/${term}`)
+			.pipe(
+				catchError( () => of ([])) //! Esto nada mas quiere decir que si no devuelve un array de country devuelva un arreglo vacio //
+			)
+
+	}
+
+	searchCountry(term : string):Observable<Country[]> {
+		return this.http.get<Country[]>(`${this.apiUrl}/name/${term}`)
+		.pipe(
+			catchError( () => of ([])) 
+		)
+	}
+
+	searchRegion(term : string):Observable<Country[]> {
+		return this.http.get<Country[]>(`${this.apiUrl}/region/${term}`)
+		.pipe(
+			catchError( () => of ([])) 
+		)
+	}
+
+	Cris2023_!
 }
