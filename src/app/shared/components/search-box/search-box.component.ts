@@ -6,15 +6,18 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styles: [
   ]
   
+  
 })
 export class SearchBoxComponent {
 
   @Output()
-  onValue = new EventEmitter();
+  onValue : EventEmitter<string> = new EventEmitter();
   
   @Input()
   public placeholder: string = ""
 
 
-  sendvalue(){}
+  sendvalue(value: string){
+  this.onValue.emit(value)
+}
 }

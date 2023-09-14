@@ -3,6 +3,6 @@
 <input 
 type="text" 
 [placeholder]="placeholder" 
-(keypress.enter)="sendvalue('txtSearchInput')"
+(keyup.enter)="sendvalue( txtSearchInput.value )" 
 class="form-control"
 #txtSearchInput>
