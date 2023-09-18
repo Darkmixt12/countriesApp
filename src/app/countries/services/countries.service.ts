@@ -43,5 +43,4 @@ export class CountriesService {
 		)
 	}
 
-	Cris2023_!
 }
