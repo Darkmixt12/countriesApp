@@ -29,8 +29,10 @@ export class CountryPageComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params
       .pipe(
-        switchMap
-      );
+        switchMap(({ id }) => this.countriesService.searchCountryByAlphaCode(id)),
+      ).subscribe( country => {
+        console.log({country})
+      });
   }
 
 }
