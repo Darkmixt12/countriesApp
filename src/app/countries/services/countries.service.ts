@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError, map, of } from 'rxjs';
+import { Observable, catchError, delay, map, of } from 'rxjs';
 import { Country } from '../interfaces/country';
 
 @Injectable({providedIn: 'root'})
@@ -19,40 +19,46 @@ export class CountriesService {
 	// 	)
 
 	// }
+	searchCountryByAlphaCode(code: string):Observable<Country | null>{
+
+		const url = `${this.apiUrl}/alpha/${ code }`;
+	
+		return this.http.get<Country[]>(url)
+		.pipe(
+		  map(countries => countries.length > 0 ? countries[0]: null),
+		  catchError(() => of(null) ),
+		  delay(2000),
+		)
+	
+	  }
+
+	  private getHttpRequest(url : string): Observable<Country[]>{
+		return this.http.get<Country[]>(url)
+		.pipe(
+			catchError( () => of ([])),//! Esto nada mas quiere decir que si no devuelve un array de country devuelva un arreglo vacio //
+			
+			)
+	  }
 
 
-	 searchCapital(term : string): Observable<Country[]> {
-	 	return this.http.get<Country[]>(`${this.apiUrl}/capital/${term}`)
-	 		.pipe(
-				catchError( () => of ([])) //! Esto nada mas quiere decir que si no devuelve un array de country devuelva un arreglo vacio //
-   		)
+	searchCapital(term : string):Observable<Country[]> {
+		
+		const url = `${this.apiUrl}/capital/${term}`;
+
+	 	return this.getHttpRequest(url);
 
 	 }
 
-  searchCountryByAlphaCode(code: string):Observable<Country | null>{
-
-    const url = `${this.apiUrl}/alpha/${ code }`;
-
-    return this.http.get<Country[]>(url)
-    .pipe(
-      map(countries => countries.length > 0 ? countries[0]: null),
-      catchError(() => of(null) )
-    )
-
-  }
-
 	searchCountry(term : string):Observable<Country[]> {
-		return this.http.get<Country[]>(`${this.apiUrl}/name/${term}`)
-		.pipe(
-			catchError( () => of ([]))
-		)
+		
+		const url = `${this.apiUrl}/name/${term}`;
+		return this.getHttpRequest(url);
 	}
 
 	searchRegion(term : string):Observable<Country[]> {
-		return this.http.get<Country[]>(`${this.apiUrl}/region/${term}`)
-		.pipe(
-			catchError( () => of ([]))
-		)
+
+		const url = `${this.apiUrl}/region/${term}`;
+		return this.getHttpRequest(url);
 	}
 
 }
