@@ -6,6 +6,7 @@
 		<shared-search-box  
 		class="searchbox"
 		(onDebounce)="searchByCountry($event)"
+		[initialValue]="initialValue"
 		[placeholder]="'Este es un nuevo placeholder'"></shared-search-box>
 	</div>
 </div>
